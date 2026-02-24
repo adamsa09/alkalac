@@ -4,6 +4,7 @@ google.charts.setOnLoadCallback(drawCharts);
 let allData = [];
 let lineChart, lineData, lineOptions;
 let currentPeriod = '1day';
+let gaugeChart, gaugeData, gaugeOptions;
 
 function drawCharts() {
   [gaugeChart, gaugeData, gaugeOptions] = buildGaugeChart(7);
@@ -24,6 +25,7 @@ function drawCharts() {
   })
 
   setupDownloadButton();
+  startLiveGaugeUpdates();
 }
 
 function buildGaugeChart(value) {
@@ -222,4 +224,16 @@ function setupDownloadButton() {
         document.body.removeChild(a);
       });
   });
+}
+
+function startLiveGaugeUpdates() {
+  setInterval(() => {
+    fetch('ph_current')
+      .then(response => response.json())
+      .then(data => {
+        gaugeData.setValue(0, 1, data.pH);
+        gaugeChart.draw(gaugeData, gaugeOptions);
+      })
+      .catch(error => console.error('Error fetching pH data:', error));
+  }, 10000);
 }

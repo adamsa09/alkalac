@@ -28,12 +28,9 @@ void mountFS();
 void moveMotor();
 
 // Classic wifi credentials
-const char* ssid = "BELL997";
-const char* password = "4383Mike";
+const char* ssid = "";
+const char* password = "";
 
-// WPA2-Enterprise EAP-TLS credentials
-// const char* ssid       = "College Sainte-Anne";
-// #define EAP_IDENTITY   "Adam.Sarhan@e.sainteanne.ca"
 
 const char* ntpServer = "pool.ntp.org";
 const long gmtOffset_sec = 0;
@@ -74,11 +71,7 @@ void setup() {
   // Print ESP32 Local IP Address
   Serial.println(WiFi.localIP());
 
-  // // Connect to WPA2-Enterprise (EAP-TLS)
-  // WiFi.disconnect(true);
-  // WiFi.mode(WIFI_STA);
-  // WiFi.begin(ssid, WPA2_AUTH_TLS, EAP_IDENTITY, NULL, NULL, ca_pem, client_crt, client_key);
-
+ 
   while (WiFi.status() != WL_CONNECTED) {
       delay(1000);
       Serial.println("Connecting to WiFi...");
@@ -195,6 +188,20 @@ void mountFS() {
   // Route to load data.json file
   server.on("/ph_data.jsonl", HTTP_GET, [](AsyncWebServerRequest* request) {
     request->send(LittleFS, "/ph_data.jsonl", "text/json");
+  });
+
+  server.on("/dispense_data.jsonl", HTTP_GET, [](AsyncWebServerRequest* request) {
+    request->send(LittleFS, "/dispense_data.jsonl", "text/json");
+  });
+
+  // Route to get current pH value
+  server.on("/ph_current", HTTP_GET, [](AsyncWebServerRequest* request) {
+    float phValue = slope * analogReadMilliVolts(PH_PIN) / 1000.0 + intercept;
+    JsonDocument doc;
+    doc["pH"] = phValue;
+    String response;
+    serializeJson(doc, response);
+    request->send(200, "application/json", response);
   });
 }
 
