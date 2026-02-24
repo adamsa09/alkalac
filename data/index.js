@@ -22,6 +22,8 @@ function drawCharts() {
     const data = text.trim().split('\n').map(line => JSON.parse(line));
     buildDispenseTable(data);
   })
+
+  setupDownloadButton();
 }
 
 function buildGaugeChart(value) {
@@ -201,5 +203,23 @@ function setupChartButtons() {
       [lineChart, lineData, lineOptions] = buildLineChart(filteredData);
       lineChart.draw(lineData, lineOptions);
     });
+  });
+}
+
+function setupDownloadButton() {
+  const downloadBtn = document.getElementById('download-btn');
+  downloadBtn.addEventListener('click', function() {
+    fetch('ph_data.jsonl')
+      .then(response => response.blob())
+      .then(blob => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'ph_data.jsonl';
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+      });
   });
 }

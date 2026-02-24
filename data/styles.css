@@ -130,6 +130,14 @@ a:visited {
   flex: 1;
 }
 
+.card-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
 .card {
   border: 5px solid #2383c2;
   background-color: #211657;
@@ -139,10 +147,15 @@ a:visited {
   flex: 1;
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
-.cards-row:first-child .card {
-  width: calc(33.333% - 7px);
+.cards-row:first-child > .card {
+  flex: 1;
+}
+
+.card-stack > .card {
+  width: 100%;
 }
 
 .cards-row:last-child .card {
@@ -160,6 +173,10 @@ a:visited {
   font-family: 'IBM Plex Mono';
   font-size: 14px;
   color: #E9EDF5;
+}
+
+.gauge {
+  margin: 0 auto;
 }
 
 .data-table thead {
@@ -227,4 +244,34 @@ a:visited {
 .chart-btn-max.active {
   border: 2px solid #2383c2;
   background-color: #1a1347;
+}
+
+.download-card {
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+
+.download-button {
+  padding: 16px 32px;
+  border: 2px solid #2383c2;
+  background-color: #1a1347;
+  color: #E9EDF5;
+  border-radius: 12px;
+  font-family: 'Inter';
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+  max-width: 250px;
+}
+
+.download-button:hover {
+  box-shadow: 0 0 20px rgba(35, 131, 194, 0.4);
+  transform: translateY(-2px);
+}
+
+.download-button:active {
+  transform: translateY(0px);
 }
