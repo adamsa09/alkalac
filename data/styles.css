@@ -113,11 +113,21 @@ a:visited {
 
 .cards {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
   width: 100%;
   gap: 10px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.cards-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  gap: 10px;
+  flex: 1;
 }
 
 .card {
@@ -125,8 +135,18 @@ a:visited {
   background-color: #211657;
   border-radius: 30px;
   padding: 20px;
-  width: fit-content;
   transition: all 0.3s ease;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.cards-row:first-child .card {
+  width: calc(33.333% - 7px);
+}
+
+.cards-row:last-child .card {
+  width: 100%;
 }
 
 .card:hover {

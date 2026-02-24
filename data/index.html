@@ -12,28 +12,32 @@
     <div class="nav-links"><a href="/">Home</a><a href="#">Analytics</a><a href="history">History</a></div>
   </div>
     <div class="cards">
-      <div class="card gauge-card">
-        <h6>Live pH</h6>
-        <div id="chart_div" class="gauge"></div>
+      <div class="cards-row">
+        <div class="card gauge-card">
+          <h6>Live pH</h6>
+          <div id="chart_div" class="gauge"></div>
+        </div>
+        <div class="card table-card">
+          <h6>Latest Data Points</h6>
+          <div id="data_table"></div>
+        </div>
+        <div class="card table-card">
+          <h6>Latest Dispense Data</h6>
+          <div id="dispense_table"></div>
+        </div>
       </div>
-      <div class="card table-card">
-        <h6>Latest Data Points</h6>
-        <div id="data_table"></div>
-      </div>
-      <div class="card table-card">
-        <h6>Latest Dispense Data</h6>
-        <div id="dispense_table"></div>
-      </div>
-      <div class="card linechart-card">
-        <h6>Historic pH</h6>
-        <div id="line_chart"></div>
-        <div class="chart-buttons">
-          <button class="chart-btn-1day active" data-period="1day">1 Day</button>
-          <button class="chart-btn-1week" data-period="1week">1 Week</button>
-          <button class="chart-btn-1month" data-period="1month">1 Month</button>
-          <button class="chart-btn-1year" data-period="1year">1 Year</button>
-          <button class="chart-btn-5year" data-period="5year">5 Year</button>
-          <button class="chart-btn-max" data-period="max">Max</button>
+      <div class="cards-row">
+        <div class="card linechart-card">
+          <h6>Historic pH</h6>
+          <div id="line_chart"></div>
+          <div class="chart-buttons">
+            <button class="chart-btn-1day active" data-period="1day">1 Day</button>
+            <button class="chart-btn-1week" data-period="1week">1 Week</button>
+            <button class="chart-btn-1month" data-period="1month">1 Month</button>
+            <button class="chart-btn-1year" data-period="1year">1 Year</button>
+            <button class="chart-btn-5year" data-period="5year">5 Year</button>
+            <button class="chart-btn-max" data-period="max">Max</button>
+          </div>
         </div>
       </div>
     </div>

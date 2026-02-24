@@ -74,7 +74,7 @@ function buildLineChart(data) {
     backgroundColor: '#211657',
     explorer: {zoomDelta: 1.07, maxZoomIn: 0.1},
     chartArea: {width:'90%',height:'100%'},
-    width: 1000,
+    width: 1350,
     height: 500 
   };
 
