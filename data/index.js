@@ -17,6 +17,11 @@ function drawCharts() {
     buildDataTable(data);
     setupChartButtons();
   })
+
+  fetch('dispense_data.jsonl').then(response => response.text()).then(text => {
+    const data = text.trim().split('\n').map(line => JSON.parse(line));
+    buildDispenseTable(data);
+  })
 }
 
 function buildGaugeChart(value) {
@@ -106,6 +111,53 @@ function buildDataTable(data) {
     phCell.textContent = item.pH.toFixed(2);
     row.appendChild(timeCell);
     row.appendChild(phCell);
+    tbody.appendChild(row);
+  });
+  table.appendChild(tbody);
+  
+  tableContainer.appendChild(table);
+}
+
+function buildDispenseTable(data) {
+  const latest10 = data.slice(-10).reverse();
+  const tableContainer = document.getElementById('dispense_table');
+  
+  if (latest10.length === 0) return;
+  
+  const table = document.createElement('table');
+  table.className = 'data-table';
+  
+  // Get all unique keys from the data to dynamically build headers
+  const keys = Object.keys(latest10[0]);
+  
+  const thead = document.createElement('thead');
+  const headerRow = document.createElement('tr');
+  keys.forEach(key => {
+    const header = document.createElement('th');
+    header.textContent = key.charAt(0).toUpperCase() + key.slice(1);
+    headerRow.appendChild(header);
+  });
+  thead.appendChild(headerRow);
+  table.appendChild(thead);
+  
+  const tbody = document.createElement('tbody');
+  latest10.forEach(item => {
+    const row = document.createElement('tr');
+    keys.forEach(key => {
+      const cell = document.createElement('td');
+      let value = item[key];
+      
+      // Format timestamp as time only
+      if (key === 'timestamp') {
+        const date = new Date(value);
+        value = date.toLocaleTimeString();
+      } else if (typeof value === 'number') {
+        value = value.toFixed(2);
+      }
+      
+      cell.textContent = value;
+      row.appendChild(cell);
+    });
     tbody.appendChild(row);
   });
   table.appendChild(tbody);
