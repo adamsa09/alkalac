@@ -27,9 +27,8 @@ void appendReading(const char* timestamp, float pH);
 void mountFS();
 void moveMotor();
 
-// Classic wifi credentials
-const char* ssid = "";
-const char* password = "";
+const char* ssid = "alkalac";
+const char* password = "alkalac123";
 
 
 const char* ntpServer = "pool.ntp.org";
