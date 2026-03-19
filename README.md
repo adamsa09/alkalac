@@ -61,7 +61,6 @@ When out of prototype stage, this dashboard will be hosted elsewhere and contain
 
 - Firmware: C++ on ESP32
 - Dashboard: JavaScript, served from the ESP32
-- Wireless: Multi-unit network support via ESP32 wireless capabilities
 
 ---
 
