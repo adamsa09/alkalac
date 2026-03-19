@@ -76,7 +76,7 @@ When out of prototype stage, this dashboard will be hosted elsewhere and contain
 ### v3 - March 2026
 - Completed software and web dashboard
 - Added historical pH chart and dispense history logging
-- Added CSV data export
+- Added JSON data export
 
 ### v2 - April 2025
 - Redesigned internal layout to maximize limestone storage capacity (60 L per unit)
