@@ -30,13 +30,15 @@ Based on a crushed limestone bulk density of 2.71 g/cm3, a single unit holds app
 
 ## Dashboard
 
-The web dashboard is hosted directly on the ESP32 microcontroller and written in JavaScript. It provides:
+The web dashboard is currently being hosted directly on the ESP32 microcontroller and written in JavaScript. It provides:
 
 - Live pH gauge
 - Table of latest pH data points
 - Table of latest dispense events
 - Historical pH chart
 - CSV download of pH data
+
+When out of prototype stage, this dashboard will be hosted elsewhere and contain a CRUD API that the ESP32 can hit.
 
 ---
 
