@@ -12,7 +12,6 @@
 #include <Wire.h>
 #include <time.h>
 #include <ArduinoJson.h>
-#include "certs.h"
 
 
 #define DISPENSE_DATA_PATH "/dispense_data.jsonl"
