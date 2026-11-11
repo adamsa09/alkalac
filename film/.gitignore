@@ -6,3 +6,4 @@ audio/*.wav
 stills/
 __pycache__/
 models/
+build_render.log
