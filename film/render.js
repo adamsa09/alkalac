@@ -9,7 +9,7 @@ const server = http.createServer((q, r) => { const f = path.join(__dirname, deco
 async function openPage(browser) {
   const p = await browser.newPage({ viewport: { width: TL.width, height: TL.height }, deviceScaleFactor: 1 });
   p.on('console', m => { if (m.type() === 'error' || m.type() === 'warning') console.log('[page]', m.text().slice(0, 600)); }); p.on('pageerror', e => console.log('[pageerror]', e.message));
-  await p.goto(`http://localhost:${server.address().port}/src/index.html`); await p.waitForFunction('window.ready===true', null, { timeout: 180000 }); return p;
+  await p.goto(`http://localhost:${server.address().port}/src/index.html`, { timeout: 300000 }); await p.waitForFunction('window.ready===true', null, { timeout: 180000 }); return p;
 }
 const launch = () => chromium.launch({ args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist', '--disable-gpu-vsync'] });
 const sh = (cmd, a) => new Promise(r => spawn(cmd, a, { stdio: 'inherit' }).on('close', r));

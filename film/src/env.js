@@ -124,7 +124,7 @@ export function makeLakeWorld(renderer) {
   const mistM = new THREE.ShaderMaterial({ transparent: true, depthWrite: false, fog: false, uniforms: U, side: THREE.DoubleSide,
     vertexShader: `varying vec2 vUv; varying vec3 vW; void main(){ vUv=uv; vec4 w=modelMatrix*vec4(position,1.); vW=w.xyz; gl_Position=projectionMatrix*viewMatrix*w; }`,
     fragmentShader: `${GLSL_NOISE} uniform vec3 fogCol,sunCol; uniform float time,mistAmt; varying vec2 vUv; varying vec3 vW; void main(){
-      float n=fbm(vec2(vW.x+vW.z,vW.y*3.)*.02+vec2(time*.02,0.)); float v=exp(-pow((vUv.y-.3)*3.2,2.))*smoothstep(0.,.12,vUv.y); float e=smoothstep(0.,.25,vUv.x)*smoothstep(1.,.75,vUv.x);
+      float n=fbm(vec2(vW.x+vW.z,vW.y*3.)*.02+vec2(time*.02,0.)); float vy=(vUv.y-.3)*3.2; float v=exp(-vy*vy)*smoothstep(0.,.12,vUv.y); float e=smoothstep(0.,.25,vUv.x)*smoothstep(1.,.75,vUv.x);
       float a=v*e*smoothstep(.3,.8,n)*.3*mistAmt*smoothstep(12.,60.,length(cameraPosition-vW)); gl_FragColor=vec4(mix(fogCol,sunCol,.4)*1.2,a); }` });
   const mist = new THREE.Group();
   for (let i = 0; i < 26; i++) { const th = i / 26 * 6.2832 + r() * 0.2, k = 0.82 + r() * 0.5, rad = lakeR(th) * k; const m = new THREE.Mesh(new THREE.PlaneGeometry(150 + r() * 90, 16 + r() * 14), mistM);

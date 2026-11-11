@@ -26,7 +26,7 @@ export function makeUnderwater() {
   // light shafts
   const shaftM = new THREE.ShaderMaterial({ transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, side: THREE.DoubleSide, fog: false, uniforms: U,
     vertexShader: `varying vec2 vUv; varying vec3 vW; void main(){ vUv=uv; vW=(modelMatrix*vec4(position,1.)).xyz; gl_Position=projectionMatrix*viewMatrix*vec4(vW,1.); }`,
-    fragmentShader: `${GLSL_NOISE} uniform float time; varying vec2 vUv; varying vec3 vW; void main(){ float e=pow(1.-abs(vUv.x-.5)*2.,2.); float n=.45+.55*fbm(vec2(vW.x*.35+time*.12,vW.z*.2)); float v=smoothstep(0.,.35,vUv.y)*(.25+.75*vUv.y); float d=length(cameraPosition-vW); gl_FragColor=vec4(vec3(.75,1.,.85)*e*n*v*.16*exp(-d*.022),1.); }` });
+    fragmentShader: `${GLSL_NOISE} uniform float time; varying vec2 vUv; varying vec3 vW; void main(){ float e=clamp(1.-abs(vUv.x-.5)*2.,0.,1.); e*=e; float n=.45+.55*fbm(vec2(vW.x*.35+time*.12,vW.z*.2)); float v=smoothstep(0.,.35,vUv.y)*(.25+.75*vUv.y); float d=length(cameraPosition-vW); gl_FragColor=vec4(vec3(.75,1.,.85)*e*n*v*.16*exp(-d*.022),1.); }` });
   for (let i = 0; i < 22; i++) { const m = new THREE.Mesh(new THREE.PlaneGeometry(1.5 + r() * 3.5, 26), shaftM); m.position.set((r() - 0.5) * 60, 7, -6 - r() * 50); m.rotation.z = -0.3 + (r() - 0.5) * 0.08; m.rotation.y = (r() - 0.5) * 0.5; m.renderOrder = 4; scene.add(m); }
   // surface from below
   const surf = new THREE.Mesh(new THREE.PlaneGeometry(400, 400), new THREE.ShaderMaterial({ side: THREE.DoubleSide, fog: false, uniforms: U,
