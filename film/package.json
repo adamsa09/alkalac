@@ -1,0 +1,14 @@
+{
+  "name": "alkalac-film",
+  "private": true,
+  "version": "1.0.0",
+  "description": "ALKALAC - Technology in Service of Nature. Procedural 3D animated explainer film.",
+  "scripts": {
+    "build": "bash build.sh",
+    "still": "node render.js --still"
+  },
+  "dependencies": {
+    "@fontsource/inter": "5.1.0",
+    "three": "0.170.0"
+  }
+}

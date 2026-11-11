@@ -1,0 +1,6 @@
+numpy
+scipy
+soundfile
+pillow
+pillow-heif
+kokoro-onnx
